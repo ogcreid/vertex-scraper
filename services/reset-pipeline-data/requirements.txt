@@ -1,0 +1,23 @@
+# This file lists all dependencies for the entire project.
+
+# Core framework for Cloud Functions/Run
+functions-framework==3.*
+
+# For making HTTP requests between services
+requests
+
+# For interacting with Google Cloud Storage
+google-cloud-storage
+
+# For interacting with Google Cloud Pub/Sub
+google-cloud-pubsub
+
+# For authenticating with other Google Cloud services
+google-auth>=2.0.0
+
+# For connecting to the PostgreSQL database
+psycopg[binary]
+
+# For parsing HTML content
+beautifulsoup4
+lxml

@@ -1,0 +1,4 @@
+functions-framework==3.*
+psycopg[binary]~=3.1
+psycopg[pool]~=3.1   # optional, if you plan to use connection pooling
+google-cloud-secret-manager>=2.16.0
