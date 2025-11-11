@@ -1,0 +1,22 @@
+[2025-11-10 22:24:41] Project=vertex-ai-scraper-project Region=us-east4 Service=reset-pipeline-data
+[2025-11-10 22:24:42] Image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/reset-pipeline-data@sha256:0faf53000ee6016ec0b815a0090df7d9a064441be609969262ea1be465e20072
+[2025-11-10 22:24:43] Exporting image filesystem with crane…
+[2025-11-10 22:24:46] tar sample:
+/cnb
+/cnb/process
+/cnb/process/web
+/layers
+/layers/config
+[2025-11-10 22:24:47] Copied from '/workspace'
+[2025-11-10 22:24:48] Markers: main.py requirements.txt
+[2025-11-10 22:24:48] Top-level in DEST:
+[ls] total 40
+[ls] drwxr-xr-x   3 oliver2  staff    96 Nov 10 22:24 __pycache__
+[ls] -rw-r--r--   1 oliver2  staff     0 Nov 10 22:24 _errors.log
+[ls] -rw-r--r--   1 oliver2  staff   594 Nov 10 22:24 _extract.log
+[ls] drwxr-xr-x   9 oliver2  staff   288 Nov 10 22:24 .
+[ls] drwxr-xr-x  15 oliver2  staff   480 Nov 10 21:34 ..
+[ls] -rw-r--r--   1 oliver2  staff   166 Nov 10 22:24 IMAGE.txt
+[ls] -rwxr-xr-x   1 oliver2  staff  1540 Dec 31  1979 main.py
+[ls] -rwxr-xr-x   1 oliver2  staff   494 Dec 31  1979 requirements.txt
+[ls] -rw-r--r--   1 oliver2  staff  3980 Nov 10 22:24 service.yaml

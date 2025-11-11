@@ -1,0 +1,22 @@
+[2025-11-10 22:24:18] Project=vertex-ai-scraper-project Region=us-east4 Service=page-publisher
+[2025-11-10 22:24:19] Image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/page-publisher@sha256:aff6839f3171a578a8f5c22ad1f3369dd314f8e07fda6f6e5d80674332525b79
+[2025-11-10 22:24:20] Exporting image filesystem with crane…
+[2025-11-10 22:24:24] tar sample:
+/cnb
+/cnb/process
+/cnb/process/web
+/layers
+/layers/config
+[2025-11-10 22:24:25] Copied from '/workspace'
+[2025-11-10 22:24:25] Markers: main.py requirements.txt
+[2025-11-10 22:24:25] Top-level in DEST:
+[ls] total 48
+[ls] drwxr-xr-x   3 oliver2  staff    96 Nov 10 22:24 __pycache__
+[ls] -rw-r--r--   1 oliver2  staff     0 Nov 10 22:24 _errors.log
+[ls] -rw-r--r--   1 oliver2  staff   584 Nov 10 22:24 _extract.log
+[ls] drwxr-xr-x   9 oliver2  staff   288 Nov 10 22:24 .
+[ls] drwxr-xr-x  15 oliver2  staff   480 Nov 10 21:34 ..
+[ls] -rw-r--r--   1 oliver2  staff   161 Nov 10 22:24 IMAGE.txt
+[ls] -rwxr-xr-x   1 oliver2  staff  5352 Dec 31  1979 main.py
+[ls] -rwxr-xr-x   1 oliver2  staff   494 Dec 31  1979 requirements.txt
+[ls] -rw-r--r--   1 oliver2  staff  4044 Nov 10 22:24 service.yaml

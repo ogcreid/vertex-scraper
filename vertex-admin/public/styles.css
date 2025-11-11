@@ -1,0 +1,8 @@
+body { font-family: system-ui, Arial, sans-serif; margin: 20px; }
+header { margin-bottom: 16px; }
+section { margin: 16px 0; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+.hidden { display: none; }
+.hint { color: #666; font-size: 0.9em; }
+.controls button { margin-right: 8px; }
+#toasts { position: fixed; right: 12px; bottom: 12px; display: flex; flex-direction: column; gap: 6px; }
+.toast { background: #222; color: #fff; padding: 8px 12px; border-radius: 6px; }

@@ -1,0 +1,98 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/build-base-image: us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313
+    run.googleapis.com/build-enable-automatic-updates: 'true'
+    run.googleapis.com/build-function-target: process_scrape_entrypoint
+    run.googleapis.com/build-image-uri: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/save-scraped-data-sql
+    run.googleapis.com/build-name: projects/677825641273/locations/us-east4/builds/65048a5c-3c1e-413f-a64a-a025a31008ff
+    run.googleapis.com/build-source-location: gs://run-sources-vertex-ai-scraper-project-us-east4/services/save-scraped-data-sql/1759010219.391000.zip#1759010219722182
+    run.googleapis.com/client-name: cloud-console
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/operation-id: 73a19595-6153-4d50-80a7-6bf6acc5db62
+    run.googleapis.com/urls: '["https://save-scraped-data-sql-677825641273.us-east4.run.app","https://save-scraped-data-sql-6eaa7aavea-uk.a.run.app"]'
+    serving.knative.dev/creator: ogcreid@gmail.com
+    serving.knative.dev/lastModifier: ogcreid@gmail.com
+  creationTimestamp: '2025-09-27T19:15:28.397954Z'
+  generation: 14
+  labels:
+    cloud.googleapis.com/location: us-east4
+    run.googleapis.com/satisfiesPzs: 'true'
+  name: save-scraped-data-sql
+  namespace: '677825641273'
+  resourceVersion: AAY/0P+yzvo
+  selfLink: /apis/serving.knative.dev/v1/namespaces/677825641273/services/save-scraped-data-sql
+  uid: 53691f63-6406-485e-921b-a8d218db183c
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '20'
+        run.googleapis.com/base-images: '{"save-scraped-data-sql":"us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313"}'
+        run.googleapis.com/client-name: cloud-console
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/startup-cpu-boost: 'true'
+      labels:
+        client.knative.dev/nonce: 3180a012-25af-4b74-a829-266a89b2dbb7
+        run.googleapis.com/startupProbeType: Default
+    spec:
+      containerConcurrency: 80
+      containers:
+      - env:
+        - name: DATABASE_URL
+          value: postgresql://user:pass@host:5432/zoho_rag
+        - name: CHUNK_SIZE_TOKENS
+          value: '800'
+        - name: OVERLAP_FRACTION
+          value: '.5'
+        - name: FORCE_REPARSE
+          value: 'true'
+        - name: LOG_LEVEL
+          value: INFO
+        image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/save-scraped-data-sql@sha256:be10f0f3fa1c17de101296e456ad5e7095f0cbbbc4a3117d1846606430e8c78d
+        name: save-scraped-data-sql
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 1Gi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 240
+      runtimeClassName: run.googleapis.com/linux-base-image-update
+      serviceAccountName: 677825641273-compute@developer.gserviceaccount.com
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
+status:
+  address:
+    url: https://save-scraped-data-sql-6eaa7aavea-uk.a.run.app
+  conditions:
+  - lastTransitionTime: '2025-09-27T23:45:35.919866Z'
+    status: 'True'
+    type: Ready
+  - severity: Info
+    status: 'True'
+    type: BaseImageValidated
+  - lastTransitionTime: '2025-09-27T23:45:34.660815Z'
+    status: 'True'
+    type: ConfigurationsReady
+  - lastTransitionTime: '2025-09-27T23:45:35.890071Z'
+    status: 'True'
+    type: RoutesReady
+  latestCreatedRevisionName: save-scraped-data-sql-00014-j4w
+  latestReadyRevisionName: save-scraped-data-sql-00014-j4w
+  observedGeneration: 14
+  traffic:
+  - latestRevision: true
+    percent: 100
+    revisionName: save-scraped-data-sql-00014-j4w
+  url: https://save-scraped-data-sql-6eaa7aavea-uk.a.run.app

@@ -1,0 +1,21 @@
+{
+  "name": "admin-panel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --trace-uncaught --enable-source-maps server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18 <21"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "google-auth-library": "^10.4.0",
+    "pg": "^8.16.3"
+  }
+}

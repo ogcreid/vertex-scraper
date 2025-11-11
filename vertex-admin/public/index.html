@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <!-- basic style file (optional) -->
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1, h2 { margin-top: 1.5em; }
+    input, button { margin: 4px; padding: 4px 8px; }
+    pre { background: #f9f9f9; padding: 8px; border-radius: 4px; }
+    table.grid { border-collapse: collapse; width: 100%; margin-top: 8px; }
+    table.grid th, table.grid td { border: 1px solid #ddd; padding: 6px 8px; vertical-align: top; }
+    table.grid th { background: #f6f6f6; text-align: left; }
+    code { background: #f3f3f3; padding: 2px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Admin Panel</h1>
+
+  <!-- Select DB section -->
+  <h2>Select database</h2>
+  <input id="dbname" placeholder="Database name">
+  <button id="set-dbname">Continue</button>
+  <p>We’ll send this as <code>X-DB-Name</code> on each API call.</p>
+
+  <!-- App Config section -->
+  <h2>App Config</h2>
+  <button id="load-config">Load</button>
+  <button id="save-config">Save</button>
+  <pre id="config-output">(config will appear here)</pre>
+
+  <!-- Sitemap Sources section -->
+  <h2>Sitemap Sources</h2>
+  <button id="load-sources">Refresh</button>
+  <div id="sources-table"></div>
+
+  <!-- JS -->
+  <script src="/app.js"></script>
+</body>
+</html>

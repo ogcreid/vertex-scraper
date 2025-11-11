@@ -1,0 +1,25 @@
+[2025-11-10 22:25:09] Project=vertex-ai-scraper-project Region=us-east4 Service=vertex-admin
+[2025-11-10 22:25:10] Image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/vertex_rag/vertex-admin:d73ae3ccde232db67c777d1897238c5e618efcf0
+[2025-11-10 22:25:13] Exporting image filesystem with crane…
+[2025-11-10 22:25:20] tar sample:
+/cnb
+/cnb/process
+/cnb/process/web
+/layers
+/layers/config
+[2025-11-10 22:25:23] Copied from '/workspace'
+[2025-11-10 22:25:24] Markers: server.js package.json
+[2025-11-10 22:25:24] Top-level in DEST:
+[ls] total 144
+[ls] -rw-r--r--    1 oliver2  staff      0 Nov 10 22:25 _errors.log
+[ls] -rw-r--r--    1 oliver2  staff    558 Nov 10 22:25 _extract.log
+[ls] drwxr-xr-x   12 oliver2  staff    384 Nov 10 22:25 .
+[ls] drwxr-xr-x   15 oliver2  staff    480 Nov 10 21:34 ..
+[ls] drwxr-xr-x   14 oliver2  staff    448 Nov 10 22:25 .git
+[ls] -rw-r--r--    1 oliver2  staff    139 Nov 10 22:25 IMAGE.txt
+[ls] drwxr-xr-x  104 oliver2  staff   3328 Nov 10 22:25 node_modules
+[ls] -rw-r--r--    1 oliver2  staff  44513 Dec 31  1979 package-lock.json
+[ls] -rw-r--r--    1 oliver2  staff    409 Dec 31  1979 package.json
+[ls] drwxr-xr-x    5 oliver2  staff    160 Nov 10 22:25 public
+[ls] -rw-r--r--    1 oliver2  staff   6843 Dec 31  1979 server.js
+[ls] -rw-r--r--    1 oliver2  staff   6313 Nov 10 22:25 service.yaml

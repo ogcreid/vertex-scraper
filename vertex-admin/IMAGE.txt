@@ -1,0 +1,1 @@
+us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/vertex_rag/vertex-admin:d73ae3ccde232db67c777d1897238c5e618efcf0

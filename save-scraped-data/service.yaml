@@ -1,0 +1,90 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/build-base-image: us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313
+    run.googleapis.com/build-enable-automatic-updates: 'true'
+    run.googleapis.com/build-function-target: save_scraped_data
+    run.googleapis.com/build-image-uri: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/save-scraped-data
+    run.googleapis.com/build-name: projects/677825641273/locations/us-east4/builds/afbd3abe-b584-40c6-8b9a-51addd68b285
+    run.googleapis.com/build-source-location: gs://run-sources-vertex-ai-scraper-project-us-east4/services/save-scraped-data/1759082564.611000.zip#1759082564941063
+    run.googleapis.com/client-name: cloud-console
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/operation-id: 8797e25a-9386-4d69-9720-420a02b8a55c
+    run.googleapis.com/urls: '["https://save-scraped-data-677825641273.us-east4.run.app","https://save-scraped-data-6eaa7aavea-uk.a.run.app"]'
+    serving.knative.dev/creator: ogcreid@gmail.com
+    serving.knative.dev/lastModifier: ogcreid@gmail.com
+  creationTimestamp: '2025-09-27T12:30:24.213293Z'
+  generation: 6
+  labels:
+    cloud.googleapis.com/location: us-east4
+    run.googleapis.com/satisfiesPzs: 'true'
+  name: save-scraped-data
+  namespace: '677825641273'
+  resourceVersion: AAY/4FZ9How
+  selfLink: /apis/serving.knative.dev/v1/namespaces/677825641273/services/save-scraped-data
+  uid: 38ab7a72-7b97-4787-b0ae-fd885c46e918
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '20'
+        run.googleapis.com/base-images: '{"save-scraped-data-1":"us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313"}'
+        run.googleapis.com/client-name: cloud-console
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/startup-cpu-boost: 'true'
+      labels:
+        client.knative.dev/nonce: 40276d25-838e-4674-bff3-785e6f22f1f4
+        run.googleapis.com/startupProbeType: Default
+    spec:
+      containerConcurrency: 80
+      containers:
+      - env:
+        - name: DATA_BUCKET
+          value: scraper-data-bucket-vertex-ai-scraper-project
+        image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/save-scraped-data@sha256:081790d35062732da31c76882d7ca613b3e27e85db6520a402df2db80ca45349
+        name: save-scraped-data-1
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 240
+      runtimeClassName: run.googleapis.com/linux-base-image-update
+      serviceAccountName: 677825641273-compute@developer.gserviceaccount.com
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
+status:
+  address:
+    url: https://save-scraped-data-6eaa7aavea-uk.a.run.app
+  conditions:
+  - lastTransitionTime: '2025-09-28T18:03:36.528524Z'
+    status: 'True'
+    type: Ready
+  - severity: Info
+    status: 'True'
+    type: BaseImageValidated
+  - lastTransitionTime: '2025-09-28T18:03:34.109891Z'
+    status: 'True'
+    type: ConfigurationsReady
+  - lastTransitionTime: '2025-09-28T18:03:36.487443Z'
+    status: 'True'
+    type: RoutesReady
+  latestCreatedRevisionName: save-scraped-data-00006-ftp
+  latestReadyRevisionName: save-scraped-data-00006-ftp
+  observedGeneration: 6
+  traffic:
+  - latestRevision: true
+    percent: 100
+    revisionName: save-scraped-data-00006-ftp
+  url: https://save-scraped-data-6eaa7aavea-uk.a.run.app

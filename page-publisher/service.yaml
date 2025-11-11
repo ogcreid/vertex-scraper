@@ -1,0 +1,99 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/build-base-image: us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313
+    run.googleapis.com/build-enable-automatic-updates: 'true'
+    run.googleapis.com/build-function-target: page_publisher
+    run.googleapis.com/build-image-uri: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/page-publisher
+    run.googleapis.com/build-name: projects/677825641273/locations/us-east4/builds/4e86f06f-02c8-46cc-a212-02a526d16074
+    run.googleapis.com/build-source-location: gs://run-sources-vertex-ai-scraper-project-us-east4/services/page-publisher/1759271353.327000.zip#1759271353593576
+    run.googleapis.com/client-name: cloud-console
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/operation-id: 3afec3ec-6845-494b-a02b-1b66a207904d
+    run.googleapis.com/urls: '["https://page-publisher-677825641273.us-east4.run.app","https://page-publisher-6eaa7aavea-uk.a.run.app"]'
+    serving.knative.dev/creator: ogcreid@gmail.com
+    serving.knative.dev/lastModifier: ogcreid@gmail.com
+  creationTimestamp: '2025-09-27T23:27:33.630552Z'
+  generation: 14
+  labels:
+    cloud.googleapis.com/location: us-east4
+    run.googleapis.com/satisfiesPzs: 'true'
+  name: page-publisher
+  namespace: '677825641273'
+  resourceVersion: AAZADKx8uyU
+  selfLink: /apis/serving.knative.dev/v1/namespaces/677825641273/services/page-publisher
+  uid: 86789884-5316-48c7-abdc-8e4a7ededc16
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '20'
+        run.googleapis.com/base-images: '{"page-publisher-1":"us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313"}'
+        run.googleapis.com/client-name: cloud-console
+        run.googleapis.com/cloudsql-instances: vertex-ai-scraper-project:us-east4:zoho-rag
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/startup-cpu-boost: 'true'
+      labels:
+        client.knative.dev/nonce: 32d54866-3a8e-4e8b-a607-646581f9968d
+        run.googleapis.com/startupProbeType: Default
+    spec:
+      containerConcurrency: 80
+      containers:
+      - env:
+        - name: PROJECT_ID
+          value: vertex-ai-scraper-project
+        - name: PUBSUB_TOPIC_ID
+          value: page-scrape-topic
+        - name: DB_INSTANCE
+          value: vertex-ai-scraper-project:us-east4:zoho-rag
+        - name: DB_PASS
+          value: V%p]K$n<F1(|3ggJ
+        - name: DB_USER
+          value: postgres
+        image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/page-publisher@sha256:aff6839f3171a578a8f5c22ad1f3369dd314f8e07fda6f6e5d80674332525b79
+        name: page-publisher-1
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 240
+      runtimeClassName: run.googleapis.com/linux-base-image-update
+      serviceAccountName: 677825641273-compute@developer.gserviceaccount.com
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
+status:
+  address:
+    url: https://page-publisher-6eaa7aavea-uk.a.run.app
+  conditions:
+  - lastTransitionTime: '2025-09-30T22:57:17.904677Z'
+    status: 'True'
+    type: Ready
+  - severity: Info
+    status: 'True'
+    type: BaseImageValidated
+  - lastTransitionTime: '2025-09-30T22:57:16.634043Z'
+    status: 'True'
+    type: ConfigurationsReady
+  - lastTransitionTime: '2025-09-30T22:57:17.868411Z'
+    status: 'True'
+    type: RoutesReady
+  latestCreatedRevisionName: page-publisher-00014-2vc
+  latestReadyRevisionName: page-publisher-00014-2vc
+  observedGeneration: 14
+  traffic:
+  - latestRevision: true
+    percent: 100
+    revisionName: page-publisher-00014-2vc
+  url: https://page-publisher-6eaa7aavea-uk.a.run.app

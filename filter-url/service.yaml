@@ -1,0 +1,86 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/build-base-image: us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313
+    run.googleapis.com/build-enable-automatic-updates: 'true'
+    run.googleapis.com/build-function-target: filter_http
+    run.googleapis.com/build-image-uri: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/filter-url
+    run.googleapis.com/build-name: projects/677825641273/locations/us-east4/builds/0c9319c7-be2c-4550-9df7-2e0a343e270a
+    run.googleapis.com/build-source-location: gs://run-sources-vertex-ai-scraper-project-us-east4/services/filter-url/1759523688.49000.zip#1759523688413994
+    run.googleapis.com/client-name: cloud-console
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/invoker-iam-disabled: 'true'
+    run.googleapis.com/operation-id: 4a7a9e19-2451-497c-a0b4-ed38c8b40518
+    run.googleapis.com/urls: '["https://filter-url-677825641273.us-east4.run.app","https://filter-url-6eaa7aavea-uk.a.run.app"]'
+    serving.knative.dev/creator: ogcreid@gmail.com
+    serving.knative.dev/lastModifier: ogcreid@gmail.com
+  creationTimestamp: '2025-10-02T20:36:55.273431Z'
+  generation: 8
+  labels:
+    cloud.googleapis.com/location: us-east4
+    run.googleapis.com/satisfiesPzs: 'true'
+  name: filter-url
+  namespace: '677825641273'
+  resourceVersion: AAZARwtOwHw
+  selfLink: /apis/serving.knative.dev/v1/namespaces/677825641273/services/filter-url
+  uid: 079a2dc6-67ac-4c87-9d09-640229d2d1f9
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '20'
+        run.googleapis.com/base-images: '{"filter-url-1":"us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313"}'
+        run.googleapis.com/client-name: cloud-console
+        run.googleapis.com/startup-cpu-boost: 'true'
+      labels:
+        run.googleapis.com/startupProbeType: Default
+    spec:
+      containerConcurrency: 80
+      containers:
+      - image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/filter-url@sha256:1c246756c2fd76df3b07fd9592ad9b21661a01d9793a17a122d950faaa1e0bd7
+        name: filter-url-1
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        startupProbe:
+          failureThreshold: 1
+          periodSeconds: 240
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 240
+      runtimeClassName: run.googleapis.com/linux-base-image-update
+      serviceAccountName: 677825641273-compute@developer.gserviceaccount.com
+      timeoutSeconds: 300
+  traffic:
+  - latestRevision: true
+    percent: 100
+status:
+  address:
+    url: https://filter-url-6eaa7aavea-uk.a.run.app
+  conditions:
+  - lastTransitionTime: '2025-10-03T20:35:36.830076Z'
+    status: 'True'
+    type: Ready
+  - severity: Info
+    status: 'True'
+    type: BaseImageValidated
+  - lastTransitionTime: '2025-10-03T20:35:34.901643Z'
+    status: 'True'
+    type: ConfigurationsReady
+  - lastTransitionTime: '2025-10-03T20:35:36.796521Z'
+    status: 'True'
+    type: RoutesReady
+  latestCreatedRevisionName: filter-url-00008-s79
+  latestReadyRevisionName: filter-url-00008-s79
+  observedGeneration: 8
+  traffic:
+  - latestRevision: true
+    percent: 100
+    revisionName: filter-url-00008-s79
+  url: https://filter-url-6eaa7aavea-uk.a.run.app
