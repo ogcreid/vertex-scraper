@@ -31,8 +31,16 @@ def find_sitemaps_for_urls_http(request):
         auth_req = google.auth.transport.requests.Request()
         token = google.oauth2.id_token.fetch_id_token(auth_req, credentials_url)
         response = requests.get(credentials_url, headers={'Authorization': f'Bearer {token}'}, timeout=10)
-        creds = response.json()['data']
         
+        # Debug logging
+        if response.status_code != 200:
+            return {"ok": False, "error": f"fetch-sql-credentials returned {response.status_code}: {response.text}"}, 500
+        
+        response_data = response.json()
+        if 'data' not in response_data:
+            return {"ok": False, "error": f"fetch-sql-credentials missing 'data' key: {response_data}"}, 500
+        
+        creds = response_data['data']
         dsn = f"host='/cloudsql/{creds['db_instance']}' dbname='{creds['db_name']}' user='{creds['user']}' password='{creds['password']}'"
         conn = psycopg.connect(dsn, row_factory=dict_row)
     except Exception as e:
