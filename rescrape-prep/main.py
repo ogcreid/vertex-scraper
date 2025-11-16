@@ -98,7 +98,7 @@ def rescrape_prep_http(request):
         with psycopg.connect(dsn) as conn, conn.cursor() as cur:
             cur.execute("CALL sp_refresh_all_sitemap_policies();")
             cur.execute("""
-                SELECT id, index_url, policy
+                SELECT id, index_url, policy, discovery_mode
                 FROM sitemap_sources
                 WHERE is_active = true
                 ORDER BY priority DESC, id ASC;
@@ -114,15 +114,27 @@ def rescrape_prep_http(request):
     debug = {"notes": [f"sources={len(sources)}"], "sources": []}
 
     # Crawl top-level only (index → leaf urlsets); worker will find organics later
-    for si, (sitemap_id, root_index_url, policy) in enumerate(sources[:LIMIT_SOURCES], start=1):
+    for si, (sitemap_id, root_index_url, policy, discovery_mode) in enumerate(sources[:LIMIT_SOURCES], start=1):
         if time.time() - t0 > TIME_BUDGET_SEC:
             print("TIME_BUDGET hit (sources loop)")
             break
 
-        src_dbg = {"sitemap_id": sitemap_id, "index_url": root_index_url}
+        src_dbg = {"sitemap_id": sitemap_id, "index_url": root_index_url, "discovery_mode": discovery_mode}
         debug["sources"].append(src_dbg)
 
-        # fetch the starting URL; DO NOT filter this starting URL
+        # Handle seed mode: skip sitemap parsing, just queue the seed URL directly
+        if discovery_mode == 'seed':
+            print(f"SRC[{si}] SEED mode: {root_index_url}")
+            if call_filter_service(sess, filter_ep, root_index_url, policy):
+                candidates.append((root_index_url, None, sitemap_id, 'seed'))
+                src_dbg["seed_accepted"] = True
+                print(f"  seed URL accepted: {root_index_url}")
+            else:
+                src_dbg["seed_accepted"] = False
+                print(f"  seed URL filtered out: {root_index_url}")
+            continue  # Move to next source
+
+        # Sitemap mode: fetch the starting URL; DO NOT filter this starting URL
         try:
             r = sess.get(root_index_url, timeout=30)
             r.raise_for_status()
