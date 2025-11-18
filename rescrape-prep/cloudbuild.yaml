@@ -6,7 +6,7 @@ substitutions:
 
   # These are the same for all of them unless you change project/region/repo:
   _REGION: "us-central1"
-  _REPO: "cloud-run-source-deploy"
+  _REPO: "vertex-scraper"
 
   # Project is inferred from the Cloud Build trigger by default,
   # but you can force it if you really want:
