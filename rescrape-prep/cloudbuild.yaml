@@ -43,6 +43,7 @@ steps:
       - "managed"
       # Leave env vars, Cloud SQL, etc. unchanged from existing service config
       - "--allow-unauthenticated"
-
+options:
+  logging: CLOUD_LOGGING_ONLY
 images:
   - "${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE_NAME}:$SHORT_SHA"
