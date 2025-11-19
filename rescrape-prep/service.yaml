@@ -2,7 +2,10 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: rescrape-prep
-  namespace: vertex-ai-scraper-project    # or project number, both work
+  namespace: '677825641273'
+  labels:
+    run.googleapis.com/satisfiesPzs: 'true'
+    cloud.googleapis.com/location: us-east4
 spec:
   template:
     metadata:
