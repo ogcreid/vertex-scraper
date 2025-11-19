@@ -3,6 +3,7 @@ import functions_framework
 from urllib.parse import urlparse
 
 def _to_list(v):
+    test = "test"
     if v is None:
         return []
     if isinstance(v, list):
