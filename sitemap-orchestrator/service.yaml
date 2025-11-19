@@ -1,101 +1,27 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  annotations:
-    run.googleapis.com/build-base-image: us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313
-    run.googleapis.com/build-enable-automatic-updates: 'true'
-    run.googleapis.com/build-function-target: sitemap_orchestrator
-    run.googleapis.com/build-image-uri: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/sitemap-orchestrator
-    run.googleapis.com/build-name: projects/677825641273/locations/us-east4/builds/ab7be5e7-6aea-4af5-af9c-bbaa987273f9
-    run.googleapis.com/build-source-location: gs://run-sources-vertex-ai-scraper-project-us-east4/services/sitemap-orchestrator/1759233925.943000.zip#1759233926325987
-    run.googleapis.com/client-name: cloud-console
-    run.googleapis.com/ingress: all
-    run.googleapis.com/ingress-status: all
-    run.googleapis.com/operation-id: 26b62ffd-4fb0-4da7-8b68-dc71ff26ee5e
-    run.googleapis.com/urls: '["https://sitemap-orchestrator-677825641273.us-east4.run.app","https://sitemap-orchestrator-6eaa7aavea-uk.a.run.app"]'
-    serving.knative.dev/creator: ogcreid@gmail.com
-    serving.knative.dev/lastModifier: ogcreid@gmail.com
-  creationTimestamp: '2025-09-26T11:37:28.352787Z'
-  generation: 29
-  labels:
-    cloud.googleapis.com/location: us-east4
-    run.googleapis.com/satisfiesPzs: 'true'
   name: sitemap-orchestrator
   namespace: '677825641273'
-  resourceVersion: AAZAC78Tn6I
-  selfLink: /apis/serving.knative.dev/v1/namespaces/677825641273/services/sitemap-orchestrator
-  uid: e1624adf-a848-4a2b-b6d7-d9777c121341
+  labels:
+    run.googleapis.com/satisfiesPzs: 'true'
+    cloud.googleapis.com/location: us-east4
 spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/maxScale: '20'
-        run.googleapis.com/base-images: '{"sitemap-orchestrator-1":"us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313"}'
-        run.googleapis.com/client-name: cloud-console
-        run.googleapis.com/cloudsql-instances: vertex-ai-scraper-project:us-east4:zoho-rag
-        run.googleapis.com/execution-environment: gen2
-        run.googleapis.com/startup-cpu-boost: 'true'
-      labels:
-        client.knative.dev/nonce: cc8ac127-01f2-430e-81b1-0043497e608a
-        run.googleapis.com/startupProbeType: Default
+        autoscaling.knative.dev/maxScale: "20"
+        run.googleapis.com/startup-cpu-boost: "true"
     spec:
       containerConcurrency: 80
+      timeoutSeconds: 300
       containers:
-      - env:
-        - name: DATA_BUCKET
-          value: scraper-data-bucket-vertex-ai-scraper-project
-        - name: CONFIG_BUCKET
-          value: scraper-config-bucket-vertex-ai-scraper-project
-        - name: QUEUE_PREPARER_URL
-          value: https://get-sitemap-677825641273.us-east4.run.app
-        - name: SITEMAP_COMPARATOR_URL
-          value: https://sitemap-comparator-677825641273.us-east4.run.app
-        - name: PRUNER_URL
-          value: https://prune-sitemap-677825641273.us-east4.run.app
-        - name: RECURSIVE_SCRAPER_URL
-          value: https://page-publisher-677825641273.us-east4.run.app
-        image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/sitemap-orchestrator@sha256:2ae37eca6c47a2acaf009fa33ebeb484d162b756a14187022e629c7bc9fd005e
-        name: sitemap-orchestrator-1
-        ports:
-        - containerPort: 8080
-          name: http1
-        resources:
-          limits:
-            cpu: 1000m
-            memory: 512Mi
-        startupProbe:
-          failureThreshold: 1
-          periodSeconds: 240
-          tcpSocket:
-            port: 8080
-          timeoutSeconds: 240
-      runtimeClassName: run.googleapis.com/linux-base-image-update
-      serviceAccountName: 677825641273-compute@developer.gserviceaccount.com
-      timeoutSeconds: 900
-  traffic:
-  - latestRevision: true
-    percent: 100
-status:
-  address:
-    url: https://sitemap-orchestrator-6eaa7aavea-uk.a.run.app
-  conditions:
-  - lastTransitionTime: '2025-09-30T21:50:54.816162Z'
-    status: 'True'
-    type: Ready
-  - severity: Info
-    status: 'True'
-    type: BaseImageValidated
-  - lastTransitionTime: '2025-09-30T21:50:52.454497Z'
-    status: 'True'
-    type: ConfigurationsReady
-  - lastTransitionTime: '2025-09-30T21:50:54.772626Z'
-    status: 'True'
-    type: RoutesReady
-  latestCreatedRevisionName: sitemap-orchestrator-00029-dr9
-  latestReadyRevisionName: sitemap-orchestrator-00029-dr9
-  observedGeneration: 29
-  traffic:
-  - latestRevision: true
-    percent: 100
-    revisionName: sitemap-orchestrator-00029-dr9
-  url: https://sitemap-orchestrator-6eaa7aavea-uk.a.run.app
+        - name: sitemap-orchestrator
+          image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/sitemap-orchestrator:latest
+          ports:
+            - name: http1
+              containerPort: 8080
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi

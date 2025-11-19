@@ -1,118 +1,27 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  annotations:
-    run.googleapis.com/build-base-image: us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python311
-    run.googleapis.com/build-enable-automatic-updates: 'true'
-    run.googleapis.com/build-function-target: find_sitemaps
-    run.googleapis.com/build-image-uri: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/get-sitemap
-    run.googleapis.com/build-name: projects/677825641273/locations/us-east4/builds/d249afc5-1e1a-4d71-97e9-d3adcb15f7fc
-    run.googleapis.com/build-source-location: gs://run-sources-vertex-ai-scraper-project-us-east4/services/get-sitemap/1759580535.631000.zip#1759580536013875
-    run.googleapis.com/client-name: cloud-console
-    run.googleapis.com/ingress: all
-    run.googleapis.com/ingress-status: all
-    run.googleapis.com/operation-id: ed24c371-0d73-45ff-818a-60197460f980
-    run.googleapis.com/urls: '["https://get-sitemap-677825641273.us-east4.run.app","https://get-sitemap-6eaa7aavea-uk.a.run.app"]'
-    serving.knative.dev/creator: ogcreid@gmail.com
-    serving.knative.dev/lastModifier: ogcreid@gmail.com
-  creationTimestamp: '2025-09-25T22:06:16.791531Z'
-  generation: 47
-  labels:
-    cloud.googleapis.com/location: us-east4
-    run.googleapis.com/satisfiesPzs: 'true'
   name: get-sitemap
   namespace: '677825641273'
-  resourceVersion: AAZAVElfOLY
-  selfLink: /apis/serving.knative.dev/v1/namespaces/677825641273/services/get-sitemap
-  uid: 30299e80-07c7-419b-bf2a-27cbf34f7fca
+  labels:
+    run.googleapis.com/satisfiesPzs: 'true'
+    cloud.googleapis.com/location: us-east4
 spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/maxScale: '20'
-        run.googleapis.com/base-images: '{"get-sitemap-1":"us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python311"}'
-        run.googleapis.com/client-name: cloud-console
-        run.googleapis.com/cloudsql-instances: vertex-ai-scraper-project:us-east4:zoho-rag
-        run.googleapis.com/execution-environment: gen2
-        run.googleapis.com/startup-cpu-boost: 'true'
-      labels:
-        client.knative.dev/nonce: 61e06ed5-6e3d-4bba-8282-a65625d0af2b
-        run.googleapis.com/startupProbeType: Default
+        autoscaling.knative.dev/maxScale: "20"
+        run.googleapis.com/startup-cpu-boost: "true"
     spec:
       containerConcurrency: 80
+      timeoutSeconds: 300
       containers:
-      - env:
-        - name: DATA_BUCKET
-          value: scraper-data-bucket-vertex-ai-scraper-project
-        - name: CONFIG_BUCKET
-          value: scraper-config-bucket-vertex-ai-scraper-project
-        - name: DB_INSTANCE
-          value: vertex-ai-scraper-project:us-east4:zoho-rag
-        - name: DB_PASS
-          value: V%p]K$n<F1(|3ggJ
-        - name: DB_USER
-          value: postgres
-        - name: FILTER_URL_ENDPOINT
-          value: https://filter-url-677825641273.us-east4.run.app
-        image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/get-sitemap@sha256:c28ba69955f77fa9467b5d8a9a2a277805f04ec9fbd66fe915862e44a94ed52e
-        name: get-sitemap-1
-        ports:
-        - containerPort: 8080
-          name: http1
-        resources:
-          limits:
-            cpu: 1000m
-            memory: 512Mi
-        startupProbe:
-          failureThreshold: 1
-          periodSeconds: 240
-          tcpSocket:
-            port: 8080
-          timeoutSeconds: 240
-      runtimeClassName: run.googleapis.com/linux-base-image-update
-      serviceAccountName: 677825641273-compute@developer.gserviceaccount.com
-      timeoutSeconds: 900
-  traffic:
-  - latestRevision: true
-    percent: 100
-status:
-  address:
-    url: https://get-sitemap-6eaa7aavea-uk.a.run.app
-  conditions:
-  - lastTransitionTime: '2025-10-04T12:23:32.605419Z'
-    message: |-
-      Revision 'get-sitemap-00047-jrk' is not ready and cannot serve traffic. The user-provided container failed to start and listen on the port defined provided by the PORT=8080 environment variable within the allocated timeout. This can happen when the container port is misconfigured or if the timeout is too short. The health check timeout can be extended. Logs for this revision might contain more information.
-
-      Logs URL: https://console.cloud.google.com/logs/viewer?project=vertex-ai-scraper-project&resource=cloud_run_revision/service_name/get-sitemap/revision_name/get-sitemap-00047-jrk&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22get-sitemap%22%0Aresource.labels.revision_name%3D%22get-sitemap-00047-jrk%22 
-      For more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start
-    reason: HealthCheckContainerError
-    status: 'False'
-    type: Ready
-  - severity: Info
-    status: 'True'
-    type: BaseImageValidated
-  - lastTransitionTime: '2025-10-04T12:23:32.590559Z'
-    message: |-
-      The user-provided container failed to start and listen on the port defined provided by the PORT=8080 environment variable within the allocated timeout. This can happen when the container port is misconfigured or if the timeout is too short. The health check timeout can be extended. Logs for this revision might contain more information.
-
-      Logs URL: https://console.cloud.google.com/logs/viewer?project=vertex-ai-scraper-project&resource=cloud_run_revision/service_name/get-sitemap/revision_name/get-sitemap-00047-jrk&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22get-sitemap%22%0Aresource.labels.revision_name%3D%22get-sitemap-00047-jrk%22 
-      For more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start
-    status: 'True'
-    type: ConfigurationsReady
-  - lastTransitionTime: '2025-10-04T12:23:32.605419Z'
-    message: |-
-      Revision 'get-sitemap-00047-jrk' is not ready and cannot serve traffic. The user-provided container failed to start and listen on the port defined provided by the PORT=8080 environment variable within the allocated timeout. This can happen when the container port is misconfigured or if the timeout is too short. The health check timeout can be extended. Logs for this revision might contain more information.
-
-      Logs URL: https://console.cloud.google.com/logs/viewer?project=vertex-ai-scraper-project&resource=cloud_run_revision/service_name/get-sitemap/revision_name/get-sitemap-00047-jrk&advancedFilter=resource.type%3D%22cloud_run_revision%22%0Aresource.labels.service_name%3D%22get-sitemap%22%0Aresource.labels.revision_name%3D%22get-sitemap-00047-jrk%22 
-      For more troubleshooting guidance, see https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start
-    reason: HealthCheckContainerError
-    status: 'False'
-    type: RoutesReady
-  latestCreatedRevisionName: get-sitemap-00047-jrk
-  latestReadyRevisionName: get-sitemap-00046-68k
-  observedGeneration: 47
-  traffic:
-  - latestRevision: true
-    percent: 100
-    revisionName: get-sitemap-00046-68k
-  url: https://get-sitemap-6eaa7aavea-uk.a.run.app
+        - name: get-sitemap
+          image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/get-sitemap:latest
+          ports:
+            - name: http1
+              containerPort: 8080
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi

@@ -1,90 +1,27 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  annotations:
-    run.googleapis.com/build-base-image: us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313
-    run.googleapis.com/build-enable-automatic-updates: 'true'
-    run.googleapis.com/build-function-target: fetch_global_creds_http
-    run.googleapis.com/build-image-uri: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/fetch-sql-credentials
-    run.googleapis.com/build-name: projects/677825641273/locations/us-east4/builds/9a0d3e74-d4e5-4736-89ca-e28846bf818d
-    run.googleapis.com/build-source-location: gs://run-sources-vertex-ai-scraper-project-us-east4/services/fetch-sql-credentials/1759706489.519000.zip#1759706489852107
-    run.googleapis.com/client-name: cloud-console
-    run.googleapis.com/ingress: all
-    run.googleapis.com/ingress-status: all
-    run.googleapis.com/operation-id: 1e92dcc4-8d3d-45e3-a03d-b93f17cd938b
-    run.googleapis.com/urls: '["https://fetch-sql-credentials-677825641273.us-east4.run.app","https://fetch-sql-credentials-6eaa7aavea-uk.a.run.app"]'
-    serving.knative.dev/creator: gcloud@fmpconnect.com
-    serving.knative.dev/lastModifier: gcloud@fmpconnect.com
-  creationTimestamp: '2025-10-05T18:48:01.883016Z'
-  generation: 13
-  labels:
-    cloud.googleapis.com/location: us-east4
-    run.googleapis.com/satisfiesPzs: 'true'
   name: fetch-sql-credentials
   namespace: '677825641273'
-  resourceVersion: AAZAcZxKlLQ
-  selfLink: /apis/serving.knative.dev/v1/namespaces/677825641273/services/fetch-sql-credentials
-  uid: fd41f3bb-0890-44cf-be29-812d7302d5e6
+  labels:
+    run.googleapis.com/satisfiesPzs: 'true'
+    cloud.googleapis.com/location: us-east4
 spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/maxScale: '20'
-        run.googleapis.com/base-images: '{"fetch-sql-credentials-1":"us-east4-docker.pkg.dev/serverless-runtimes/google-22/runtimes/python313"}'
-        run.googleapis.com/client-name: cloud-console
-        run.googleapis.com/cloudsql-instances: vertex-ai-scraper-project:us-east4:rag
-        run.googleapis.com/execution-environment: gen2
-        run.googleapis.com/startup-cpu-boost: 'true'
-      labels:
-        client.knative.dev/nonce: 792015ee-b524-48e0-860b-925447a41b39
-        run.googleapis.com/startupProbeType: Default
+        autoscaling.knative.dev/maxScale: "20"
+        run.googleapis.com/startup-cpu-boost: "true"
     spec:
       containerConcurrency: 80
-      containers:
-      - image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/fetch-sql-credentials:latest
-        name: fetch-sql-credentials-1
-        ports:
-        - containerPort: 8080
-          name: http1
-        resources:
-          limits:
-            cpu: 1000m
-            memory: 512Mi
-        startupProbe:
-          failureThreshold: 1
-          periodSeconds: 240
-          tcpSocket:
-            port: 8080
-          timeoutSeconds: 240
-      runtimeClassName: run.googleapis.com/linux-base-image-update
-      serviceAccountName: 677825641273-compute@developer.gserviceaccount.com
       timeoutSeconds: 300
-      cloudSqlInstances:
-      - vertex-ai-scraper-project:us-east4:rag
-  traffic:
-  - latestRevision: true
-    percent: 100
-status:
-  address:
-    url: https://fetch-sql-credentials-6eaa7aavea-uk.a.run.app
-  conditions:
-  - lastTransitionTime: '2025-10-05T23:22:37.879476Z'
-    status: 'True'
-    type: Ready
-  - severity: Info
-    status: 'True'
-    type: BaseImageValidated
-  - lastTransitionTime: '2025-10-05T23:22:36.615627Z'
-    status: 'True'
-    type: ConfigurationsReady
-  - lastTransitionTime: '2025-10-05T23:22:37.842762Z'
-    status: 'True'
-    type: RoutesReady
-  latestCreatedRevisionName: fetch-sql-credentials-00013-9fc
-  latestReadyRevisionName: fetch-sql-credentials-00013-9fc
-  observedGeneration: 13
-  traffic:
-  - latestRevision: true
-    percent: 100
-    revisionName: fetch-sql-credentials-00013-9fc
-  url: https://fetch-sql-credentials-6eaa7aavea-uk.a.run.app
+      containers:
+        - name: fetch-sql-credentials
+          image: us-east4-docker.pkg.dev/vertex-ai-scraper-project/cloud-run-source-deploy/fetch-sql-credentials:latest
+          ports:
+            - name: http1
+              containerPort: 8080
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 512Mi
