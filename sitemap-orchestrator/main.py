@@ -1,4 +1,4 @@
-# Don Nov 18 v1.1
+# Don Nov 18 v1.1 / OR also
 import os
 import uuid
 import psycopg
